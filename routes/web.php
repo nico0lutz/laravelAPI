@@ -20,5 +20,3 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::view('/feed', 'feed');
-
-Route::view('/client', 'newClient');
