@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-            <h1>Home page</h1>
+            <passport-clients></passport-clients>
             </div>
         </div>
     </div>
