@@ -20,3 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::view('/feed', 'feed');
+
+Route::get('/clients', function() {
+    return view('apiClients');
+})->middleware('auth');
+
+Route::get('/addPost', 'PostController@store');

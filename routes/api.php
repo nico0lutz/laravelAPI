@@ -18,3 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/posts', 'Api\ApiController@posts');
+
+Route::middleware('auth:api')->post('/addPost', 'Api\ApiController@storePost');
+
+Route::middleware('auth:api')->get('/myPosts', 'Api\ApiController@postsByUser');
+
+Route::get('/post/{id}', 'Api\ApiController@getPost');
+
+Route::middleware('auth:api')->delete('deletePost/{id}', 'Api\ApiController@deletePost');
+
+Route::middleware('auth:api')->put('editPost', 'Api\ApiController@editPost');

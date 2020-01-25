@@ -21,6 +21,14 @@ tr, td {
 @section('content')
 <div class="feed">
     <h1 id="feed_header"><b>Feed</b></h1><br>
+    
+    <form action="addPost" method="GET">
+        <input type="text" name="title" placeholder="Title"><br>
+        <textarea name="content" cols="80" rows="6">
+        </textarea><br>
+        <input type="submit" value="Add Post">
+    </form>
+    
     <table>
         <?php
             $posts = App\Post::orderBy('created_at', 'desc')->get();
