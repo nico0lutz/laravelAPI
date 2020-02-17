@@ -25,11 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return '<form action="addPost" method="POST">
-                    <input type="text" name="title">
-                    <input type="text" name="content">
-                    <input type="submit" value="Add Post">
-                </form>';
+        
     }
 
     /**

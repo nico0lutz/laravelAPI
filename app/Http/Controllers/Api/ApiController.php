@@ -8,7 +8,13 @@ use App\Post;
 use Auth;
 
 class ApiController extends Controller
-{
+{   
+    /**
+     * Pulls all posts from the DB
+     * 
+     * @param Request
+     * @return Posts
+     */
     function posts(Request $request)
     {
         $posts = Post::orderBy('created_at', 'desc')->get();
@@ -17,6 +23,13 @@ class ApiController extends Controller
         return $response;
     }
 
+    /**
+     * Pulls a post specified by an id
+     * 
+     * @param Request
+     * @param id
+     * @return Post
+     */
     function getPost(Request $request, $id)
     {
         $post = Post::find($id);
@@ -24,6 +37,12 @@ class ApiController extends Controller
         return json_encode($post, JSON_PRETTY_PRINT);
     }
 
+    /**
+     * Pulls all posts owned by a specified user from the DB
+     * 
+     * @param Request
+     * @return Posts
+     */
     function postsByUser(Request $request)
     {
         $posts = Post::where('author', $request->user()->name)->orderBy('created_at', 'desc')->get();
@@ -32,6 +51,12 @@ class ApiController extends Controller
         return $response;
     }
 
+    /**
+     * Saves a post to the DB
+     * 
+     * @param Request
+     * @return Post
+     */
     function storePost(Request $request)
     {
         $post = new Post;
@@ -52,6 +77,12 @@ class ApiController extends Controller
         return json_encode($response, JSON_PRETTY_PRINT);
     }
 
+    /**
+     * Edits a post by given parameters
+     * 
+     * @param Request
+     * @return Post
+     */
     function editPost(Request $request)
     {   
         $post = Post::find($request->id);
@@ -71,6 +102,12 @@ class ApiController extends Controller
         return json_encode($response, JSON_PRETTY_PRINT);
     }
 
+    /** 
+     * Deletes a post from the DB
+     * 
+     * @param Request
+     * @return Message
+     */
     function deletePost(Request $request, $id)
     {
         $post = Post::find($id);
