@@ -21,6 +21,18 @@ class ApiController extends Controller
         $response = json_encode($posts, JSON_PRETTY_PRINT);
 
         return $response;
+
+        // if you want to return xml instead of json
+        /*$posts = Post::orderBy('created_at', 'desc')->get();
+        $json = json_encode($posts, JSON_PRETTY_PRINT);
+        $dataArray = json_decode($json, true);
+
+        $xml = new \SimpleXMLElement('<?xml version="1.0"?><data></data>');
+
+        $this->array_to_xml($dataArray,$xml);
+
+        // change this to a return statement
+        var_dump($xml);*/
     }
 
     /**
@@ -119,5 +131,19 @@ class ApiController extends Controller
         $response = ['message' => 'Post was deleted successfully'];
 
         return json_encode($response, JSON_PRETTY_PRINT);
+    }
+
+    function array_to_xml( $data, &$xml_data ) {
+        foreach( $data as $key => $value ) {
+            if( is_array($value) ) {
+                if( is_numeric($key) ){
+                    $key = 'item'.$key; //dealing with <0/>..<n/> issues
+                }
+                $subnode = $xml_data->addChild($key);
+                $this->array_to_xml($value, $subnode);
+            } else {
+                $xml_data->addChild("$key",htmlspecialchars("$value"));
+            }
+         }
     }
 }
