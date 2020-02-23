@@ -75,8 +75,18 @@ class ApiController extends Controller
         $author = $request->user()->name;
 
         $post->author = $author;
-        $post->title = $request->title;
-        $post->content = $request->content;
+        
+        if($request->title){
+            $post->title = $request->title;
+        }else{
+            $post->title = "";
+        }
+        
+        if($request->content){
+            $post->content = $request->content;
+        }else{
+            $post->content = "";
+        }     
 
         $post->save();
 
@@ -101,8 +111,17 @@ class ApiController extends Controller
         
         $this->authorize('update', $post);
 
-        $post->title = $request->title;
-        $post->content = $request->content;
+        if($request->title){
+            $post->title = $request->title;
+        }else{
+            $post->title = "";
+        }
+        
+        if($request->content){
+            $post->content = $request->content;
+        }else{
+            $post->content = "";
+        }
 
         $post->save();
 
