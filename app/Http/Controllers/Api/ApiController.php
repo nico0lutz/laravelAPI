@@ -76,17 +76,17 @@ class ApiController extends Controller
 
         $post->author = $author;
         
-        if($request->title){
+        if($post->title){
             $post->title = $request->title;
         }else{
-            $post->title = "";
+            return json_encode('Pleas fill all fields');
         }
         
-        if($request->content){
+        if($post->content){
             $post->content = $request->content;
         }else{
-            $post->content = "";
-        }     
+            return json_encode('Pleas fill all fields');
+        }
 
         $post->save();
 
@@ -111,16 +111,16 @@ class ApiController extends Controller
         
         $this->authorize('update', $post);
 
-        if($request->title){
+        if($post->title){
             $post->title = $request->title;
         }else{
-            $post->title = "";
+            return json_encode('Pleas fill all fields');
         }
         
-        if($request->content){
+        if($post->content){
             $post->content = $request->content;
         }else{
-            $post->content = "";
+            return json_encode('Pleas fill all fields');
         }
 
         $post->save();
